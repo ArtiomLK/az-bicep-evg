@@ -8,7 +8,7 @@ var tags = {
   env: 'dev'
 }
 
-param location string = 'eastus2'
+param location string = 'eastus'
 
 // ------------------------------------------------------------------------------------------------
 // REPLACE
@@ -24,6 +24,15 @@ module evgtA '../main.bicep' = {
   name: 'evgtA'
   params: {
     evgt_n: 'evgtA'
+    tags: tags
+    location: location
+  }
+}
+
+module evgtB '../main.bicep' = {
+  name: 'evgtB'
+  params: {
+    evgt_n: 'evgtB'
     tags: tags
     location: location
   }
