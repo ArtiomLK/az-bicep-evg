@@ -71,6 +71,34 @@ resource pip 'Microsoft.Network/publicIPAddresses@2021-03-01' = {
   zones: []
 }
 
+resource nic 'Microsoft.Network/networkInterfaces@2020-08-01' = {
+  name: 'nic-vm'
+  location: location
+  properties: {
+    ipConfigurations: [
+      {
+        name: 'ipconfig1'
+        properties: {
+          publicIPAddress: {
+            id: pip.id
+          }
+          privateIPAllocationMethod: 'Dynamic'
+          subnet: {
+            id: '${vnet}/subnets/${subnet[0]}'
+          }
+          primary: true
+          privateIPAddressVersion: 'IPv4'
+        }
+      }
+    ]
+    dnsSettings: {
+      dnsServers: []
+    }
+    enableAcceleratedNetworking: false
+    enableIPForwarding: false
+  }
+}
+
 // ------------------------------------------------------------------------------------------------
 // Event Grid Topic Deployment Examples
 // ------------------------------------------------------------------------------------------------
