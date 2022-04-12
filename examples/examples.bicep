@@ -28,15 +28,13 @@ param location string = 'eastus2'
 //   }
 //   tags: tags
 // }
-var subnet =   [
-  {
+var snet_vm = {
     name: 'snet-vnet-t'
     subnetPrefix: '192.167.0.0/28'
     nsgId: nsgDefault.outputs.id
     privateEndpointNetworkPolicies: 'Enabled'
     delegations: []
   }
-]
 
 module nsgDefault '../module/nsg/nsgDefault.bicep' = {
   name: 'nsg-default'
@@ -49,7 +47,9 @@ module vnet '../module/vnet/vnet.bicep' = {
   name: 'vnet'
   params: {
     location: location
-    subnets: subnet
+    subnets: [
+      snet_vm
+    ]
     vnet_addr: '192.167.0.0/24'
     vnet_n: 'vnet-evg'
     tags: tags
@@ -84,7 +84,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2020-08-01' = {
           }
           privateIPAllocationMethod: 'Dynamic'
           subnet: {
-            id: '${vnet}/subnets/${subnet[0]}'
+            id: '${vnet}/subnets/${snet_vm.name}'
           }
           primary: true
           privateIPAddressVersion: 'IPv4'
