@@ -19,15 +19,15 @@ param location string = 'eastus2'
 // ------------------------------------------------------------------------------------------------
 // Set Up Additional Resources to Test Event Grid
 // ------------------------------------------------------------------------------------------------
-// Logic App
-resource logic 'Microsoft.Logic/workflows@2016-06-01' = {
-  name: 'logicworkflow'
-  location: location
-  properties: {
-    state: 'Enabled'
-  }
-  tags: tags
-}
+// // Logic App
+// resource logic 'Microsoft.Logic/workflows@2016-06-01' = {
+//   name: 'logicworkflow'
+//   location: location
+//   properties: {
+//     state: 'Enabled'
+//   }
+//   tags: tags
+// }
 
 // ------------------------------------------------------------------------------------------------
 // Event Grid Topic Deployment Examples
