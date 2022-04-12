@@ -8,7 +8,7 @@ var tags = {
   env: 'dev'
 }
 
-param location string = 'eastus'
+param location string = 'eastus2'
 
 // ------------------------------------------------------------------------------------------------
 // REPLACE
@@ -22,6 +22,7 @@ param location string = 'eastus'
 // Logic App
 resource logic 'Microsoft.Logic/workflows@2016-06-01' = {
   name: 'logicworkflow'
+  location: location
 }
 
 // ------------------------------------------------------------------------------------------------
