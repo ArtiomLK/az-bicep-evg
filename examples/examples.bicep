@@ -84,7 +84,7 @@ resource nic 'Microsoft.Network/networkInterfaces@2020-08-01' = {
           }
           privateIPAllocationMethod: 'Dynamic'
           subnet: {
-            id: '${vnet}/subnets/${snet_vm.name}'
+            id: '${vnet.outputs.id}/subnets/${snet_vm.name}'
           }
           primary: true
           privateIPAddressVersion: 'IPv4'
