@@ -23,6 +23,7 @@ param location string = 'eastus2'
 resource logic 'Microsoft.Logic/workflows@2016-06-01' = {
   name: 'logicworkflow'
   location: location
+  tags: tags
 }
 
 // ------------------------------------------------------------------------------------------------
