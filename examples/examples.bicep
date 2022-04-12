@@ -28,6 +28,33 @@ param location string = 'eastus2'
 //   }
 //   tags: tags
 // }
+var subnet =   [
+  {
+    name: 'snet-vnet-t'
+    subnetPrefix: '192.167.0.0/28'
+    nsgId: nsgDefault.outputs.id
+    privateEndpointNetworkPolicies: 'Enabled'
+    delegations: []
+  }
+]
+
+module nsgDefault '../module/nsg/nsgDefault.bicep' = {
+  name: 'nsg-default'
+  params: {
+    location: location
+  }
+}
+
+module vnet '../module/vnet/vnet.bicep' = {
+  name: 'vnet'
+  params: {
+    location: location
+    subnets: subnet
+    vnet_addr: '192.167.0.0/24'
+    vnet_n: 'vnet-evg'
+    tags: tags
+  }
+}
 
 // ------------------------------------------------------------------------------------------------
 // Event Grid Topic Deployment Examples
