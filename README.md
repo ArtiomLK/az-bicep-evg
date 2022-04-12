@@ -2,15 +2,28 @@
 
 [![DEV - Deploy Azure Resource](https://github.com/ArtiomLK/azure-bicep-event-grid/actions/workflows/dev.orchestrator.yml/badge.svg?branch=main&event=push)](https://github.com/ArtiomLK/azure-bicep-event-grid/actions/workflows/dev.orchestrator.yml)
 
-- Event Grid Topics
-- Event Grid Partner Topic
-- Event Grid System Topic
-- Event Grid Domain
-- Event Grid Input Output
-- Event Grid Subscriptions
-- Event Grid Namespaces
+Event Grid aggregates all your events and provides routing from any source to any destination. Event Grid is a service that manages event routing and delivery from many sources and subscribers. This process eliminates the need for polling and results in minimized cost and latency.
 
-## Instructions
+## Capabilities
+
+- It can filter events. Thus, handlers receive only relevant events
+- It supports multiple subscribers. Attach multiple handlers to a single event from a single source
+- It's reliable, 24-hour retries to ensure events are delivered
+- It's throughput is high. Handle a high volume of event, in the range of millions per second
+- It has built-in events. Use build-in events to get started quickly
+- It supports custom Events. Use Event Grid to reliably deliver events for your custom components
+
+## Producers
+
+Sources can be configured from anywhere, and include on-premises custom applications or virtual machines within your Azure account. A source allows a single mechanism for event management through all your systems, whether they're in an on-premises datacenter or with other cloud providers.
+
+## Event Handlers
+
+- Azure Functions
+- Azure Logic Apps
+- Azure Automation
+- Azure Event Hub
+- Azure Service Bus
 
 ## Parameter Values
 
@@ -38,4 +51,17 @@ az deployment group create \
 --template-file examples/examples.bicep
 ```
 
+## Additional Resources
+
+- Event Grid Topics
+- Event Grid Partner Topic
+- Event Grid System Topic
+- Event Grid Domain
+- Event Grid Input Output
+- Event Grid Subscriptions
+- Event Grid Namespaces
+
+[MS | Learn | React to state changes in your Azure services by using Event Grid][2]
+
 [1]: ./examples/examples.bicep
+[2]: https://docs.microsoft.com/en-us/learn/modules/react-to-state-changes-using-event-grid/
