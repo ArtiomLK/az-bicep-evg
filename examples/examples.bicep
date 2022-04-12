@@ -56,6 +56,21 @@ module vnet '../module/vnet/vnet.bicep' = {
   }
 }
 
+resource pip 'Microsoft.Network/publicIPAddresses@2021-03-01' = {
+  name: 'pip-vnet'
+  tags: tags
+  location: location
+  sku: {
+    name: 'Basic'
+    tier: 'Regional'
+  }
+  properties: {
+    publicIPAddressVersion: 'IPv4'
+    publicIPAllocationMethod: 'Dynamic'
+  }
+  zones: []
+}
+
 // ------------------------------------------------------------------------------------------------
 // Event Grid Topic Deployment Examples
 // ------------------------------------------------------------------------------------------------
