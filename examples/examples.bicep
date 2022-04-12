@@ -57,7 +57,7 @@ module vnet '../module/vnet/vnet.bicep' = {
 }
 
 resource pip 'Microsoft.Network/publicIPAddresses@2021-03-01' = {
-  name: 'pip-vnet'
+  name: 'pip-vm'
   tags: tags
   location: location
   sku: {
