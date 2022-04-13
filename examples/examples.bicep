@@ -36,20 +36,20 @@ param vm_password string
 
 var vm_n = 'vm-evg-t'
 
-var snet_vm = {
-    name: 'snet-vnet-t'
-    subnetPrefix: '192.167.0.0/28'
-    nsgId: nsgDefault.outputs.id
-    privateEndpointNetworkPolicies: 'Enabled'
-    delegations: []
-  }
-
-module nsgDefault '../module/nsg/nsgDefault.bicep' = {
-  name: 'nsg-default'
+module nsgRdp '../module/nsg/nsgRDP.bicep' = {
+  name: 'nsg-rdp'
   params: {
     location: location
   }
 }
+
+var snet_vm = {
+    name: 'snet-vnet-t'
+    subnetPrefix: '192.167.0.0/28'
+    nsgId: nsgRdp.outputs.id
+    privateEndpointNetworkPolicies: 'Enabled'
+    delegations: []
+  }
 
 module vnet '../module/vnet/vnet.bicep' = {
   name: 'vnet-t'
