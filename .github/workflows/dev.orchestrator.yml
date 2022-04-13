@@ -22,6 +22,8 @@ jobs:
     - uses: ./.github/actions/deploy-az-resource
       with:
         az_rg_n: ${{ env.RG_N }}
+        vm_username: ${{ secrets.VM_USERNAME }}
+        vm_password: ${{ secrets.VM_PASS }}
 
       # Deploy Resource to ACR
     - uses: azure/docker-login@v1

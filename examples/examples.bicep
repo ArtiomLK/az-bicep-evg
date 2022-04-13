@@ -10,6 +10,11 @@ var tags = {
 
 param location string = 'eastus2'
 
+@secure()
+param vm_username string
+@secure()
+param vm_password string
+
 // ------------------------------------------------------------------------------------------------
 // REPLACE
 // '../main.bicep' by the ref with your version, for example:
@@ -28,6 +33,9 @@ param location string = 'eastus2'
 //   }
 //   tags: tags
 // }
+
+var vm_n = 'vm-evg-t'
+
 var snet_vm = {
     name: 'snet-vnet-t'
     subnetPrefix: '192.167.0.0/28'
@@ -44,7 +52,7 @@ module nsgDefault '../module/nsg/nsgDefault.bicep' = {
 }
 
 module vnet '../module/vnet/vnet.bicep' = {
-  name: 'vnet'
+  name: 'vnet-t'
   params: {
     location: location
     subnets: [
@@ -57,7 +65,7 @@ module vnet '../module/vnet/vnet.bicep' = {
 }
 
 resource pip 'Microsoft.Network/publicIPAddresses@2021-03-01' = {
-  name: 'pip-vm'
+  name: 'pip-vm-t'
   tags: tags
   location: location
   sku: {
@@ -72,7 +80,7 @@ resource pip 'Microsoft.Network/publicIPAddresses@2021-03-01' = {
 }
 
 resource nic 'Microsoft.Network/networkInterfaces@2020-08-01' = {
-  name: 'nic-vm'
+  name: 'nic-vm-t'
   location: location
   properties: {
     ipConfigurations: [
@@ -96,6 +104,44 @@ resource nic 'Microsoft.Network/networkInterfaces@2020-08-01' = {
     }
     enableAcceleratedNetworking: false
     enableIPForwarding: false
+  }
+}
+
+resource VirtualMachine 'Microsoft.Compute/virtualMachines@2021-03-01' = {
+  name: vm_n
+  location: location
+  properties:{
+    hardwareProfile: {
+      vmSize:'Standard_D2s_v3'
+      }
+      storageProfile: {
+        osDisk: {
+          name: 'os-disk'
+          createOption: 'FromImage'
+          osType: 'Windows'
+          managedDisk: {
+            storageAccountType: 'StandardSSD_LRS'
+          }
+        }
+        imageReference: {
+          publisher: 'MicrosoftWindowsDesktop'
+          offer: 'Windows-10'
+          sku: '19H1-ent'
+          version: '18362.1198.2011031735'
+        }
+      }
+      osProfile: {
+        computerName: vm_n
+        adminUsername: vm_username
+        adminPassword: vm_password
+      }
+      networkProfile: {
+        networkInterfaces: [
+          {
+            id: nic.id
+          }
+        ]
+      }
   }
 }
 

@@ -4,6 +4,12 @@ inputs:
   az_rg_n:
     description: “Azure ResourceGroup name”
     required: true
+  vm_username:
+    description: "test vm username"
+    required: true
+  vm_password:
+    description: "test vm password"
+    required: true
 
 runs:
   using: 'composite'
@@ -15,4 +21,5 @@ runs:
       resourceGroupName: ${{ inputs.az_rg_n }}
       deploymentMode: Complete
       template: examples/examples.bicep
+      parameters: vm_username=${{ inputs.vm_username }} vm_password=${{ inputs.vm_password }}
       failOnStdErr: true
