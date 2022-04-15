@@ -7,7 +7,7 @@ resource nsgRDP 'Microsoft.Network/networkSecurityGroups@2021-02-01' = {
   properties: {
     securityRules: [
       {
-        name: 'DenyRDPByDefault'
+        name: 'DenyRDP'
         properties: {
             protocol: 'Tcp'
             sourcePortRange: '*'
