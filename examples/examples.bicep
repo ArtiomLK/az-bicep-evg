@@ -159,6 +159,12 @@ resource st 'Microsoft.Storage/storageAccounts@2021-02-01' = {
 
 }
 
+resource evgBlobSystemTopic 'Microsoft.EventGrid/systemTopics@2021-12-01' = {
+  name: 'evg-blob-system-topic'
+  location: location
+  tags: tags
+}
+
 
 // ------------------------------------------------------------------------------------------------
 // Event Grid Topic Deployment Examples
