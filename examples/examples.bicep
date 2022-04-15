@@ -149,7 +149,7 @@ resource VirtualMachine 'Microsoft.Compute/virtualMachines@2021-03-01' = {
 }
 
 resource st 'Microsoft.Storage/storageAccounts@2021-02-01' = {
-  name: 'st${replace(guid(subscription().id, resourceGroup().id),'-','')}'
+  name: take('st${replace(guid(subscription().id, resourceGroup().id), '-', '')}', 24)
   tags: tags
   location: location
   kind: 'StorageV2'
