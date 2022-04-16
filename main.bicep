@@ -84,7 +84,7 @@ resource viewerEvgs 'Microsoft.EventGrid/systemTopics/eventSubscriptions@2021-12
   properties: {
     destination: {
       properties: {
-        endpointUrl: viewerApp.outputs.siteEventUri
+        endpointUrl: deploy_sys_evgt ? viewerApp.outputs.siteEventUri : ''
       }
       endpointType: 'WebHook'
     }
