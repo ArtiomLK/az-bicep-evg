@@ -156,13 +156,47 @@ resource st 'Microsoft.Storage/storageAccounts@2021-02-01' = {
   sku: {
     name: 'Standard_LRS'
   }
-
+  properties: {
+    accessTier: 'Hot'
+  }
 }
 
-resource evgBlobSystemTopic 'Microsoft.EventGrid/systemTopics@2021-12-01' = {
-  name: 'evg-blob-system-topic'
+
+resource systemTopic 'Microsoft.EventGrid/systemTopics@2021-12-01' = {
+  name: 'evgt-st'
   location: location
-  tags: tags
+  properties: {
+    source: st.id
+    topicType: 'Microsoft.Storage.StorageAccounts'
+  }
+}
+
+module viewerApp 'viewer.bicep' = {
+  name: 'viewerApp'
+  params: {
+    siteName: 'evg-viewer-lk'
+    tags: tags
+    location: location
+  }
+}
+
+resource eventSubscription 'Microsoft.EventGrid/systemTopics/eventSubscriptions@2021-12-01' = {
+  parent: systemTopic
+  name: 'evgs-blob'
+  properties: {
+    destination: {
+      properties: {
+        endpointUrl: viewerApp.outputs.siteEventUri
+      }
+      endpointType: 'WebHook'
+    }
+    filter: {
+      includedEventTypes: [
+        'Microsoft.Storage.BlobCreated'
+        'Microsoft.Storage.BlobDeleted'
+      ]
+    }
+  }
 }
 
 
