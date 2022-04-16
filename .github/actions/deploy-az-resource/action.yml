@@ -21,5 +21,4 @@ runs:
       resourceGroupName: ${{ inputs.az_rg_n }}
       deploymentMode: Complete
       template: examples/examples.bicep
-      parameters: vm_username=${{ inputs.vm_username }} vm_password=${{ inputs.vm_password }}
       failOnStdErr: true
