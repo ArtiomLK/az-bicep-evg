@@ -27,7 +27,7 @@ param evgt_n string = 'evgt'
 param deploy_sys_evgt bool = false
 
 @description('Append PostFix to Az System Event Grid Topic related resources')
-param evgt_sys_post_fix string = take(guid(resourceGroup().id, sys_evgt_n), 4)
+param evgt_sys_post_fix string = deploy_sys_evgt ? take(guid(resourceGroup().id, sys_evgt_n), 4) : ''
 
 @description('System Event Grid Topic Name')
 @maxLength(64)
