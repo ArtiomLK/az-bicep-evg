@@ -30,11 +30,8 @@ param deploy_sys_evgt bool = false
 @maxLength(64)
 param sys_evgt_n string = 'sys-evgt'
 
-@description('Append PostFix to Az System Event Grid Topic related resources')
-param evgt_sys_post_fix string = deploy_sys_evgt ? take(guid(resourceGroup().id, sys_evgt_n), 4) : ''
-
-var viewer_app_n = 'viewerApp-${evgt_sys_post_fix}'
-
+var app_evg_viewer_n = 'viewer-app-${sys_evgt_n}'
+var st_n = take('st${replace(sys_evgt_n, '-', '')}${take(guid(resourceGroup().id, sys_evgt_n), 4)}', 24)
 // ------------------------------------------------------------------------------------------------
 // Deploy EVGT
 // ------------------------------------------------------------------------------------------------
@@ -48,7 +45,7 @@ resource evgTopic 'Microsoft.EventGrid/topics@2021-12-01' = if (deploy_evgt) {
 // Deploy EVGT (System Topic)
 // ------------------------------------------------------------------------------------------------
 resource st 'Microsoft.Storage/storageAccounts@2021-02-01' = if(deploy_sys_evgt) {
-  name: take('stevg${replace(guid(subscription().id, resourceGroup().id, evgt_sys_post_fix), '-', '')}', 24)
+  name: st_n
   tags: tags
   location: location
   kind: 'StorageV2'
@@ -70,9 +67,9 @@ resource sysEvgt 'Microsoft.EventGrid/systemTopics@2021-12-01' = if(deploy_sys_e
 }
 
 module viewerApp './module/viewer/viewer.bicep' = if(deploy_sys_evgt) {
-  name: viewer_app_n
+  name: app_evg_viewer_n
   params: {
-    siteName: deploy_sys_evgt ? viewer_app_n : ''
+    siteName: deploy_sys_evgt ? app_evg_viewer_n : ''
     tags: tags
     location: location
   }
@@ -80,7 +77,7 @@ module viewerApp './module/viewer/viewer.bicep' = if(deploy_sys_evgt) {
 
 resource viewerEvgs 'Microsoft.EventGrid/systemTopics/eventSubscriptions@2021-12-01' = if(deploy_sys_evgt) {
   parent: sysEvgt
-  name: 'evgs-blob-${evgt_sys_post_fix}'
+  name: 'evgs-blob-${sys_evgt_n}'
   properties: {
     destination: {
       properties: {

@@ -21,15 +21,14 @@ Sources can be configured from anywhere, and include on-premises custom applicat
 
 ## Deployment Parameter Values
 
-| Name              | Description                                                                                  | Value                         | Examples                                                             |
-| ----------------- | -------------------------------------------------------------------------------------------- | ----------------------------- | -------------------------------------------------------------------- |
-| tags              | Az Resources tags                                                                            | object                        | `{ key: value }`                                                     |
-| location          | Az Resources deployment location. To get Az regions run `az account list-locations -o table` | string [default: rg location] | `eastus` \| `centralus` \| `westus` \| `westus2` \| `southcentralus` |
-| deploy_evgt       | Enable Event Grid Topic deployment                                                           | string [default: false]       | `true` \| `false`                                                    |
-| evgt_n            | Event Grid Topic Name                                                                        | string                        |                                                                      |
-| deploy_evgt       | Enable Event Grid System Topic deployment                                                    | string [default: false]       | `true` \| `false`                                                    |
-| deploy_sys_evgt   | System Event Grid Topic Name                                                                 | string                        |                                                                      |
-| evgt_sys_post_fix | Append PostFix to Az System Event Grid Topic related resources                               | string                        |                                                                      |
+| Name            | Description                                                                                  | Value                         | Examples                                                             |
+| --------------- | -------------------------------------------------------------------------------------------- | ----------------------------- | -------------------------------------------------------------------- |
+| tags            | Az Resources tags                                                                            | object                        | `{ key: value }`                                                     |
+| location        | Az Resources deployment location. To get Az regions run `az account list-locations -o table` | string [default: rg location] | `eastus` \| `centralus` \| `westus` \| `westus2` \| `southcentralus` |
+| deploy_evgt     | Enable Event Grid Topic deployment                                                           | string [default: false]       | `true` \| `false`                                                    |
+| evgt_n          | Event Grid Topic Name                                                                        | string                        |                                                                      |
+| deploy_evgt     | Enable Event Grid System Topic deployment                                                    | string [default: false]       | `true` \| `false`                                                    |
+| deploy_sys_evgt | System Event Grid Topic Name                                                                 | string                        |                                                                      |
 
 ### [Reference Examples][1]
 
