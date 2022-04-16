@@ -4,12 +4,6 @@ inputs:
   az_rg_n:
     description: “Azure ResourceGroup name”
     required: true
-  vm_username:
-    description: "test vm username"
-    required: true
-  vm_password:
-    description: "test vm password"
-    required: true
 
 runs:
   using: 'composite'
