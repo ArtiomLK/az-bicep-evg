@@ -33,8 +33,8 @@ param sys_evgt_n string = 'sys-evgt'
 @description('Append PostFix to Az System Event Grid Topic related resources')
 param evgt_sys_post_fix string = deploy_sys_evgt ? take(guid(resourceGroup().id, sys_evgt_n), 4) : ''
 
-var viewer_app_n = 'viewerApp-${evgt_sys_post_fix}'
-
+var viewer_app_n = 'viewerApp${evgt_sys_post_fix}'
+var st_n = take('stevg${viewer_app_n}${replace(guid(subscription().id, resourceGroup().id, evgt_sys_post_fix), '-', '')}', 24)
 // ------------------------------------------------------------------------------------------------
 // Deploy EVGT
 // ------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ resource evgTopic 'Microsoft.EventGrid/topics@2021-12-01' = if (deploy_evgt) {
 // Deploy EVGT (System Topic)
 // ------------------------------------------------------------------------------------------------
 resource st 'Microsoft.Storage/storageAccounts@2021-02-01' = if(deploy_sys_evgt) {
-  name: take('stevg${replace(guid(subscription().id, resourceGroup().id, evgt_sys_post_fix), '-', '')}', 24)
+  name: st_n
   tags: tags
   location: location
   kind: 'StorageV2'
