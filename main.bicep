@@ -8,7 +8,7 @@ param tags object = {}
 param location string = resourceGroup().location
 
 // ------------------------------------------------------------------------------------------------
-// FD Configuration parameters
+// EVG Configuration parameters
 // ------------------------------------------------------------------------------------------------
 @description('Event Grid Topic Name')
 @maxLength(64)

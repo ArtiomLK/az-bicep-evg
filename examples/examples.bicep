@@ -9,12 +9,6 @@ var tags = {
 }
 
 param location string = 'eastus2'
-
-@secure()
-param vm_username string
-@secure()
-param vm_password string
-
 // ------------------------------------------------------------------------------------------------
 // REPLACE
 // '../main.bicep' by the ref with your version, for example:
