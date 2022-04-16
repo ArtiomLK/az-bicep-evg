@@ -31,10 +31,10 @@ param deploy_sys_evgt bool = false
 param sys_evgt_n string = 'sys-evgt'
 
 @description('Append PostFix to Az System Event Grid Topic related resources')
-param evgt_sys_post_fix string = deploy_sys_evgt ? take(guid(resourceGroup().id, sys_evgt_n), 4) : ''
+// param evgt_sys_post_fix string = deploy_sys_evgt ? take(guid(resourceGroup().id, sys_evgt_n), 4) : ''
 
-var viewer_app_n = 'viewerApp${evgt_sys_post_fix}'
-var st_n = take('stevg${viewer_app_n}${replace(guid(subscription().id, resourceGroup().id, evgt_sys_post_fix), '-', '')}', 24)
+var viewer_app_n = 'viewer-app-${sys_evgt_n}'
+var st_n = take('stevg${replace(sys_evgt_n, '-', '')}', 24)
 // ------------------------------------------------------------------------------------------------
 // Deploy EVGT
 // ------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ module viewerApp './module/viewer/viewer.bicep' = if(deploy_sys_evgt) {
 
 resource viewerEvgs 'Microsoft.EventGrid/systemTopics/eventSubscriptions@2021-12-01' = if(deploy_sys_evgt) {
   parent: sysEvgt
-  name: 'evgs-blob-${evgt_sys_post_fix}'
+  name: 'evgs-blob-${sys_evgt_n}'
   properties: {
     destination: {
       properties: {
