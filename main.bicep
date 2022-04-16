@@ -13,7 +13,7 @@ param location string = resourceGroup().location
 // @description('Append PostFix to Az Event Grid Topic related resources')
 // param evgt_post_fix string = take(guid(resourceGroup().id, evgt_n), 4)
 
-@description('Enbale Event Grid Topic deployment')
+@description('Enable Event Grid Topic deployment')
 param deploy_evgt bool = false
 
 @description('Event Grid Topic Name')
@@ -23,15 +23,15 @@ param evgt_n string = 'evgt'
 // ------------------------------------------------------------------------------------------------
 // System EVGT Configuration parameters
 // ------------------------------------------------------------------------------------------------
-@description('Enbale Event Grid System Topic deployment')
+@description('Enable Event Grid System Topic deployment')
 param deploy_sys_evgt bool = false
-
-@description('Append PostFix to Az System Event Grid Topic related resources')
-param evgt_sys_post_fix string = deploy_sys_evgt ? take(guid(resourceGroup().id, sys_evgt_n), 4) : ''
 
 @description('System Event Grid Topic Name')
 @maxLength(64)
 param sys_evgt_n string = 'sys-evgt'
+
+@description('Append PostFix to Az System Event Grid Topic related resources')
+param evgt_sys_post_fix string = deploy_sys_evgt ? take(guid(resourceGroup().id, sys_evgt_n), 4) : ''
 
 var viewer_app_n = 'viewerApp-${evgt_sys_post_fix}'
 

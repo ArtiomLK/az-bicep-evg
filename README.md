@@ -17,21 +17,19 @@ Event Grid aggregates all your events and provides routing from any source to an
 
 Sources can be configured from anywhere, and include on-premises custom applications or virtual machines within your Azure account. A source allows a single mechanism for event management through all your systems, whether they're in an on-premises datacenter or with other cloud providers.
 
-## Event Handlers
+## [Azure services that support system topics][3]
 
-- Azure Functions
-- Azure Logic Apps
-- Azure Automation
-- Azure Event Hub
-- Azure Service Bus
+## Deployment Parameter Values
 
-## Parameter Values
-
-| Name     | Description                                                                                  | Value                         | Examples                                                             |
-| -------- | -------------------------------------------------------------------------------------------- | ----------------------------- | -------------------------------------------------------------------- |
-| tags     | Az Resources tags                                                                            | object                        | `{ key: value }`                                                     |
-| location | Az Resources deployment location. To get Az regions run `az account list-locations -o table` | string [default: rg location] | `eastus` \| `centralus` \| `westus` \| `westus2` \| `southcentralus` |
-| evgt_n   | Event Grid Topic Name                                                                        | string [required]             |                                                                      |
+| Name              | Description                                                                                  | Value                         | Examples                                                             |
+| ----------------- | -------------------------------------------------------------------------------------------- | ----------------------------- | -------------------------------------------------------------------- |
+| tags              | Az Resources tags                                                                            | object                        | `{ key: value }`                                                     |
+| location          | Az Resources deployment location. To get Az regions run `az account list-locations -o table` | string [default: rg location] | `eastus` \| `centralus` \| `westus` \| `westus2` \| `southcentralus` |
+| deploy_evgt       | Enable Event Grid Topic deployment                                                           | string [default: false]       | `true` \| `false`                                                    |
+| evgt_n            | Event Grid Topic Name                                                                        | string                        |                                                                      |
+| deploy_evgt       | Enable Event Grid System Topic deployment                                                    | string [default: false]       | `true` \| `false`                                                    |
+| deploy_sys_evgt   | System Event Grid Topic Name                                                                 | string                        |                                                                      |
+| evgt_sys_post_fix | Append PostFix to Az System Event Grid Topic related resources                               | string                        |                                                                      |
 
 ### [Reference Examples][1]
 
@@ -62,6 +60,8 @@ az deployment group create \
 - Event Grid Namespaces
 
 [MS | Learn | React to state changes in your Azure services by using Event Grid][2]
+[MS | Learn | Azure services that support system topics][3]
 
 [1]: ./examples/examples.bicep
 [2]: https://docs.microsoft.com/en-us/learn/modules/react-to-state-changes-using-event-grid/
+[3]: https://docs.microsoft.com/en-us/azure/event-grid/system-topics#azure-services-that-support-system-topics
