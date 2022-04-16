@@ -72,7 +72,7 @@ resource sysEvgt 'Microsoft.EventGrid/systemTopics@2021-12-01' = if(deploy_sys_e
 module viewerApp './module/viewer/viewer.bicep' = if(deploy_sys_evgt) {
   name: viewer_app_n
   params: {
-    siteName: viewer_app_n
+    siteName: deploy_sys_evgt ? viewer_app_n : ''
     tags: tags
     location: location
   }
