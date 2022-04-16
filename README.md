@@ -48,8 +48,6 @@ az deployment group create \
 --template-file examples/examples.bicep
 ```
 
-## Additional Resources
-
 - Event Grid Topics
 - Event Grid Partner Topic
 - Event Grid System Topic
@@ -58,8 +56,10 @@ az deployment group create \
 - Event Grid Subscriptions
 - Event Grid Namespaces
 
-[MS | Learn | React to state changes in your Azure services by using Event Grid][2]
-[MS | Learn | Azure services that support system topics][3]
+## Additional Resources
+
+- [MS | Learn | React to state changes in your Azure services by using Event Grid][2]
+- [MS | Learn | Azure services that support system topics][3]
 
 [1]: ./examples/examples.bicep
 [2]: https://docs.microsoft.com/en-us/learn/modules/react-to-state-changes-using-event-grid/
