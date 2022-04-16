@@ -20,7 +20,7 @@ param location string = 'eastus2'
 // ------------------------------------------------------------------------------------------------
 
 module evgtA '../main.bicep' = {
-  name: 'evgtA'
+  name: 'evgt-a'
   params: {
     deploy_evgt: true
     evgt_n: 'evgt-a'
@@ -30,7 +30,7 @@ module evgtA '../main.bicep' = {
 }
 
 module evgtB '../main.bicep' = {
-  name: 'evgtB'
+  name: 'evgt-b'
   params: {
     deploy_evgt: true
     evgt_n: 'evgt-b'
@@ -40,7 +40,7 @@ module evgtB '../main.bicep' = {
 }
 
 module evgtN '../main.bicep' = {
-  name: 'evgtN'
+  name: 'evgt-n'
   params: {
     deploy_evgt: true
     evgt_n: 'evgt-n'
@@ -54,7 +54,7 @@ module evgtN '../main.bicep' = {
 // ------------------------------------------------------------------------------------------------
 
 module sysEvgtA '../main.bicep' = {
-  name: 'sys-evgtA'
+  name: 'sys-evgt-a'
   params: {
     deploy_sys_evgt: true
     sys_evgt_n: 'sys-evgt-a'
@@ -64,7 +64,7 @@ module sysEvgtA '../main.bicep' = {
 }
 
 module sysEvgtB '../main.bicep' = {
-  name: 'sys-evgtB'
+  name: 'sys-evgt-b'
   params: {
     deploy_sys_evgt: true
     sys_evgt_n: 'sys-evgt-b'
@@ -74,7 +74,7 @@ module sysEvgtB '../main.bicep' = {
 }
 
 module sysEvgtN '../main.bicep' = {
-  name: 'sys-evgtN'
+  name: 'sys-evgt-n'
   params: {
     deploy_sys_evgt: true
     sys_evgt_n: 'sys-evgt-n'
