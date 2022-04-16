@@ -74,10 +74,10 @@ module sysEvgtB '../main.bicep' = {
 }
 
 module sysEvgtN '../main.bicep' = {
-  name: 'sys-evgtc'
+  name: 'sys-evgtN'
   params: {
     deploy_sys_evgt: true
-    sys_evgt_n: 'sys-evgt-c'
+    sys_evgt_n: 'sys-evgt-n'
     tags: tags
     location: location
   }

@@ -33,6 +33,8 @@ param evgt_sys_post_fix string = deploy_sys_evgt ? take(guid(resourceGroup().id,
 @maxLength(64)
 param sys_evgt_n string = 'sys-evgt'
 
+var viewer_app_n = 'viewerApp-${evgt_sys_post_fix}'
+
 // ------------------------------------------------------------------------------------------------
 // Deploy EVGT
 // ------------------------------------------------------------------------------------------------
@@ -68,9 +70,9 @@ resource sysEvgt 'Microsoft.EventGrid/systemTopics@2021-12-01' = if(deploy_sys_e
 }
 
 module viewerApp './module/viewer/viewer.bicep' = if(deploy_sys_evgt) {
-  name: 'viewerApp-${evgt_sys_post_fix}'
+  name: viewer_app_n
   params: {
-    siteName: 'viewerApp-${evgt_sys_post_fix}'
+    siteName: viewer_app_n
     tags: tags
     location: location
   }
