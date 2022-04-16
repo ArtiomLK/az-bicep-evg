@@ -8,8 +8,7 @@ var tags = {
   env: 'dev'
 }
 
-param location string = 'eastus'
-
+param location string = 'eastus2'
 // ------------------------------------------------------------------------------------------------
 // REPLACE
 // '../main.bicep' by the ref with your version, for example:
@@ -21,18 +20,64 @@ param location string = 'eastus'
 // ------------------------------------------------------------------------------------------------
 
 module evgtA '../main.bicep' = {
-  name: 'evgtA'
+  name: 'evgt-a'
   params: {
-    evgt_n: 'evgtA'
+    deploy_evgt: true
+    evgt_n: 'evgt-a'
     tags: tags
     location: location
   }
 }
 
 module evgtB '../main.bicep' = {
-  name: 'evgtB'
+  name: 'evgt-b'
   params: {
-    evgt_n: 'evgtB'
+    deploy_evgt: true
+    evgt_n: 'evgt-b'
+    tags: tags
+    location: location
+  }
+}
+
+module evgtN '../main.bicep' = {
+  name: 'evgt-n'
+  params: {
+    deploy_evgt: true
+    evgt_n: 'evgt-n'
+    tags: tags
+    location: location
+  }
+}
+
+// ------------------------------------------------------------------------------------------------
+// System Event Grid Topic Deployment Examples
+// ------------------------------------------------------------------------------------------------
+
+module sysEvgtA '../main.bicep' = {
+  name: 'sys-evgt-a'
+  params: {
+    deploy_sys_evgt: true
+    sys_evgt_n: 'sys-evgt-a'
+    tags: tags
+    location: location
+  }
+}
+
+module sysEvgtB '../main.bicep' = {
+  name: 'sys-evgt-b'
+  params: {
+    deploy_sys_evgt: true
+    sys_evgt_n: 'sys-evgt-b'
+    tags: tags
+    location: location
+  }
+}
+
+module sysEvgtN '../main.bicep' = {
+  name: 'sys-evgt-n'
+  params: {
+    deploy_sys_evgt: true
+    sys_evgt_n: 'sys-evgt-n'
     tags: tags
     location: location
   }
