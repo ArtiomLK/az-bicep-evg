@@ -30,7 +30,7 @@ param deploy_sys_evgt bool = false
 @maxLength(64)
 param sys_evgt_n string = 'sys-evgt'
 
-var viewer_app_n = 'viewer-app-${sys_evgt_n}'
+var app_evg_viewer_n = 'viewer-app-${sys_evgt_n}'
 var st_n = take('st${replace(sys_evgt_n, '-', '')}${take(guid(resourceGroup().id, sys_evgt_n), 4)}', 24)
 // ------------------------------------------------------------------------------------------------
 // Deploy EVGT
@@ -67,9 +67,9 @@ resource sysEvgt 'Microsoft.EventGrid/systemTopics@2021-12-01' = if(deploy_sys_e
 }
 
 module viewerApp './module/viewer/viewer.bicep' = if(deploy_sys_evgt) {
-  name: viewer_app_n
+  name: app_evg_viewer_n
   params: {
-    siteName: deploy_sys_evgt ? viewer_app_n : ''
+    siteName: deploy_sys_evgt ? app_evg_viewer_n : ''
     tags: tags
     location: location
   }
