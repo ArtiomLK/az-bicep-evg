@@ -34,7 +34,7 @@ param sys_evgt_n string = 'sys-evgt'
 // param evgt_sys_post_fix string = deploy_sys_evgt ? take(guid(resourceGroup().id, sys_evgt_n), 4) : ''
 
 var viewer_app_n = 'viewer-app-${sys_evgt_n}'
-var st_n = take('stevg${replace(sys_evgt_n, '-', '')}', 24)
+var st_n = take('st${replace(sys_evgt_n, '-', '')}', 24)
 // ------------------------------------------------------------------------------------------------
 // Deploy EVGT
 // ------------------------------------------------------------------------------------------------
