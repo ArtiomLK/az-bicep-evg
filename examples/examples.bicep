@@ -16,67 +16,14 @@ param location string = 'eastus2'
 // ------------------------------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------------------------------
-// Set Up Additional Resources to Test Event Grid
-// ------------------------------------------------------------------------------------------------
-resource st 'Microsoft.Storage/storageAccounts@2021-02-01' = {
-  name: take('stevg${replace(guid(subscription().id, resourceGroup().id), '-', '')}', 24)
-  tags: tags
-  location: location
-  kind: 'StorageV2'
-  sku: {
-    name: 'Standard_LRS'
-  }
-  properties: {
-    accessTier: 'Hot'
-  }
-}
-
-resource systemTopic 'Microsoft.EventGrid/systemTopics@2021-12-01' = {
-  name: 'evgt-st'
-  location: location
-  properties: {
-    source: st.id
-    topicType: 'Microsoft.Storage.StorageAccounts'
-  }
-}
-
-module viewerApp 'viewer.bicep' = {
-  name: 'viewerApp'
-  params: {
-    siteName: 'evg-viewer-lk'
-    tags: tags
-    location: location
-  }
-}
-
-resource eventSubscription 'Microsoft.EventGrid/systemTopics/eventSubscriptions@2021-12-01' = {
-  parent: systemTopic
-  name: 'evgs-blob'
-  properties: {
-    destination: {
-      properties: {
-        endpointUrl: viewerApp.outputs.siteEventUri
-      }
-      endpointType: 'WebHook'
-    }
-    filter: {
-      includedEventTypes: [
-        'Microsoft.Storage.BlobCreated'
-        'Microsoft.Storage.BlobDeleted'
-      ]
-    }
-  }
-}
-
-
-// ------------------------------------------------------------------------------------------------
 // Event Grid Topic Deployment Examples
 // ------------------------------------------------------------------------------------------------
 
 module evgtA '../main.bicep' = {
   name: 'evgtA'
   params: {
-    evgt_n: 'evgtA'
+    deploy_evgt: true
+    evgt_n: 'evgt-a'
     tags: tags
     location: location
   }
@@ -85,7 +32,52 @@ module evgtA '../main.bicep' = {
 module evgtB '../main.bicep' = {
   name: 'evgtB'
   params: {
-    evgt_n: 'evgtB'
+    deploy_evgt: true
+    evgt_n: 'evgt-b'
+    tags: tags
+    location: location
+  }
+}
+
+module evgtN '../main.bicep' = {
+  name: 'evgtN'
+  params: {
+    deploy_evgt: true
+    evgt_n: 'evgt-n'
+    tags: tags
+    location: location
+  }
+}
+
+// ------------------------------------------------------------------------------------------------
+// System Event Grid Topic Deployment Examples
+// ------------------------------------------------------------------------------------------------
+
+module sysEvgtA '../main.bicep' = {
+  name: 'sys-evgtA'
+  params: {
+    deploy_sys_evgt: true
+    sys_evgt_n: 'sys-evgt-a'
+    tags: tags
+    location: location
+  }
+}
+
+module sysEvgtB '../main.bicep' = {
+  name: 'sys-evgtB'
+  params: {
+    deploy_sys_evgt: true
+    sys_evgt_n: 'sys-evgt-b'
+    tags: tags
+    location: location
+  }
+}
+
+module sysEvgtN '../main.bicep' = {
+  name: 'sys-evgtc'
+  params: {
+    deploy_sys_evgt: true
+    sys_evgt_n: 'sys-evgt-c'
     tags: tags
     location: location
   }
