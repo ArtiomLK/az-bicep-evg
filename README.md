@@ -59,8 +59,10 @@ az deployment group create \
 ## Additional Resources
 
 - [MS | Learn | React to state changes in your Azure services by using Event Grid][2]
-- [MS | Learn | Azure services that support system topics][3]
+- [MS | Docs | Azure services that support system topics][3]
+- [MS | Docs | Azure Event Grid Viewer][4]
 
 [1]: ./examples/examples.bicep
 [2]: https://docs.microsoft.com/en-us/learn/modules/react-to-state-changes-using-event-grid/
 [3]: https://docs.microsoft.com/en-us/azure/event-grid/system-topics#azure-services-that-support-system-topics
+[4]: https://docs.microsoft.com/en-us/samples/azure-samples/azure-event-grid-viewer/azure-event-grid-viewer
